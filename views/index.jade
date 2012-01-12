@@ -1,0 +1,19 @@
+!!! 5
+html
+  head
+    title 15m Todo List
+    link(rel="stylesheet", href="15m.css")
+  body
+    h1 15 Minute Todo List
+    ul
+      each doc in docs
+        li(class= doc.done ? "done" : "open")
+          form(method="post", action="/delete/#{doc.id}")
+            input.delete(type="submit", value="\u267b")
+          form(method="post", action="/done/#{doc.id}")
+            input.check(type="submit", value=doc.done ? "\u2611" : "\u2610")
+          span= doc.todo
+    form(method="post", action="/new")
+      input(type="text", name="todo")
+    script
+      document.querySelector("input[type=text]").focus()
